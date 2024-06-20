@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Servicios ZiirTech</title>
+    <title>ZiirTech - Mantenimiento y Soporte Informático</title>
     <style>
         :root{
             --primary-color: #4b0082
         }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
             margin: 0;
             padding: 0;
-            color: #333;
+            color: #111;
+            min-height: 100vh;
         }
+        
         .header {
             background-color: var(--primary-color);
             color: white;
@@ -48,13 +51,16 @@
             text-decoration: none;
             font-weight: bold;
         }
+
+        .contact div {
+            margin-bottom: 12px;
+        }
+
         .footer {
             text-align: center;
             padding: 20px;
             background-color: var(--primary-color);
             color: white;
-            position: relative;
-            bottom: 0;
             max-width: 100%;
         }
         .footer a {
@@ -70,7 +76,7 @@
         <h2>Mantenimiento y Soporte Informático</h2>
     </div>
     <div class="container">
-        <div class="section">
+        <article class="section">
             <h2>Servicios de Mantenimiento</h2>
             <div class="service">
                 <h3>Mantenimiento Preventivo</h3>
@@ -84,8 +90,8 @@
                 <h3>Optimización del Rendimiento</h3>
                 <p>Mejora del rendimiento del sistema para un funcionamiento más rápido y eficiente.</p>
             </div>
-        </div>
-        <div class="section">
+        </article>
+        <article class="section">
             <h2>Servicios de Soporte</h2>
             <div class="service">
                 <h3>Soporte Técnico Remoto</h3>
@@ -99,8 +105,8 @@
                 <h3>Instalación de Software y Hardware</h3>
                 <p>Configuración e instalación de nuevos programas y componentes.</p>
             </div>
-        </div>
-        <div class="section">
+        </article>
+        <article class="section">
             <h2>Nuestras Especialidades</h2>
             <div class="specialty">
                 <h3>Mantenimiento de Hardware y Software</h3>
@@ -114,14 +120,26 @@
                 <h3>Configuración de Redes</h3>
                 <p>Diseño e implementación de redes seguras y eficientes.</p>
             </div>
-        </div>
-        <div class="section contact">
+        </article>
+        <nav class="section contact">
             <h2>Contáctanos</h2>
-            <p><strong>Teléfono:</strong> ‪3502574899‬</p>
-            <p><strong>Correo:</strong> ziirtech.72001233@gmail.com</p>
-            <p><strong>WhatsApp:</strong> <a href="https://wa.me/+573502574899">Haz clic aquí para chatear con nosotros</a></p>
-            <p><strong>Instagram:</strong> <a href="https://www.instagram.com/ziirtech?igshid=MWszbXpsYnB4Y3Nmag==">Síguenos en Instagram</a></p>
-        </div>
+            <div>
+                <strong>Teléfono:</strong> 
+                <a href="tel:3502574899">350 257 4899</a>
+            </div>
+            <div>
+                <strong>Correo:</strong> 
+                <a href="mailto:ziirtech.72001233@gmail.com">ziirtech.72001233@gmail.com</a>
+            </div>
+            <div>
+                <strong>WhatsApp:</strong> 
+                <a href="https://wa.me/+573502574899">Haz clic aquí para chatear con nosotros</a>
+            </div>
+            <div>
+                <strong>Instagram:</strong> 
+                <a href="https://www.instagram.com/ziirtech">@ziirtech</a>
+            </div>
+        </nav>
     </div>
     <div class="footer">
         <p>Síguenos en nuestras redes sociales para más actualizaciones.</p>
