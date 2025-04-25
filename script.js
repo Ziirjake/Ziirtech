@@ -14,14 +14,14 @@ setInterval(rotateText, 3000);
 
 // Firebase Configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAEmSj7LJFSOTHBJbN6rKZ1mxcXf0dfx3M",
-    authDomain: "ziirtech.firebaseapp.com",
-    projectId: "ziirtech",
-    storageBucket: "ziirtech.firebasestorage.app",
-    messagingSenderId: "858886696245",
-    appId: "1:858886696245:web:c2cb9dba2235db041bf07c",
-    measurementId: "G-ZXQJQBFM7R"
-  };
+  apiKey: "AIzaSyAEmSj7LJFSOTHBJbN6rKZ1mxcXf0dfx3M",
+  authDomain: "ziirtech.firebaseapp.com",
+  projectId: "ziirtech",
+  storageBucket: "ziirtech.firebasestorage.app",
+  messagingSenderId: "858886696245",
+  appId: "1:858886696245:web:166760194a4a880d1bf07c",
+  measurementId: "G-3WLB72Q34P"
+};
 
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
@@ -55,29 +55,23 @@ function closeModal() {
 }
 
 // Form Submission
-async function saveRequest(formData) {
-    try {
-      const docRef = await db.collection("solicitudes").add({
-        ...formData,
-        fecha: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      console.log("Documento escrito con ID: ", docRef.id);
-      return true;
-    } catch (error) {
-      console.error("Error detallado:", error);
-      
-      // Fallback a WhatsApp
-      const whatsappMsg = `*SOLICITUD DE EMERGENCIA*%0A` + 
-        `(Error en sistema)%0A%0A` +
-        `Servicio: ${formData.servicio}%0A` +
-        `Nombre: ${formData.nombre}%0A` +
-        `Tel: ${formData.telefono}%0A` +
-        `Problema: ${formData.problema}`;
-      
-      window.open(`https://wa.me/573103510752?text=${whatsappMsg}`, '_blank');
-      return false;
-    }
+async function saveRequest(serviceType, formData) {
+  try {
+    await db.collection("solicitudes").add({
+      servicio: serviceType,
+      nombre: formData.nombre,
+      email: formData.email,
+      telefono: formData.telefono || 'No proporcionado',
+      problema: formData.problema,
+      fecha: firebase.firestore.FieldValue.serverTimestamp(),
+      origen: "Página Web"
+    });
+    return true;
+  } catch (error) {
+    console.error("Error Firebase:", error);
+    return false;
   }
+}
   
   // Uso en el evento submit
   form.addEventListener('submit', async (e) => {
