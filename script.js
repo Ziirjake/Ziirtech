@@ -14,17 +14,18 @@ setInterval(rotateText, 3000);
 
 // Firebase Configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAEmSj7LJFSOTHBJbN6rKZ1mxcXf0dfx3M",
-  authDomain: "ziirtech.firebaseapp.com",
-  projectId: "ziirtech",
-  storageBucket: "ziirtech.firebasestorage.app",
-  messagingSenderId: "858886696245",
-  appId: "1:858886696245:web:166760194a4a880d1bf07c",
-  measurementId: "G-3WLB72Q34P"
+    apiKey: "AIzaSyAEmSj7LJFSOTHBJbN6rKZ1mxcXf0dfx3M",
+    authDomain: "ziirtech.firebaseapp.com",
+    projectId: "ziirtech",
+    storageBucket: "ziirtech.appspot.com",
+    messagingSenderId: "858886696245",
+    appId: "1:858886696245:web:166760194a4a880d1bf07c",
+    measurementId: "G-3WLB72Q34P"
 };
 
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 // Modal Functions
 function openModal(serviceType) {
@@ -55,39 +56,52 @@ function closeModal() {
 }
 
 // Form Submission
-async function saveRequest(serviceType, formData) {
-  try {
-    await db.collection("solicitudes").add({
-      servicio: serviceType,
-      nombre: formData.nombre,
-      email: formData.email,
-      telefono: formData.telefono || 'No proporcionado',
-      problema: formData.problema,
-      fecha: firebase.firestore.FieldValue.serverTimestamp(),
-      origen: "Página Web"
-    });
-    return true;
-  } catch (error) {
-    console.error("Error Firebase:", error);
-    return false;
-  }
-}
-  
-  // Uso en el evento submit
-  form.addEventListener('submit', async (e) => {
+document.getElementById('service-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const success = await saveRequest({
-      nombre: e.target[0].value,
-      // ... otros campos
-    });
     
-    if (success) {
-      alert("✅ Enviado correctamente");
-      closeModal();
-    } else {
-      alert("⚠️ Usamos WhatsApp como respaldo. Ya recibimos tu solicitud.");
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+    const formData = {
+        nombre: e.target[0].value,
+        email: e.target[1].value,
+        telefono: e.target[2].value || 'No proporcionado',
+        problema: e.target[3].value,
+        servicio: document.getElementById('modal-title').textContent,
+        fecha: firebase.firestore.FieldValue.serverTimestamp(),
+        origen: "Página Web"
+    };
+
+    try {
+        // Intento principal con Firebase
+        const docRef = await db.collection("solicitudes").add(formData);
+        console.log("Documento ID:", docRef.id);
+        
+        // Feedback al usuario
+        alert("✅ Solicitud registrada correctamente");
+        closeModal();
+        e.target.reset();
+
+    } catch (error) {
+        console.error("Error completo:", error);
+        
+        // Fallback a WhatsApp
+        const whatsappMsg = `*SOLICITUD DE EMERGENCIA*%0A` + 
+            `(Error en sistema)%0A%0A` +
+            `*Servicio:* ${formData.servicio}%0A` +
+            `*Nombre:* ${formData.nombre}%0A` +
+            `*Teléfono:* ${formData.telefono}%0A` +
+            `*Problema:* ${formData.problema}`;
+        
+        window.open(`https://wa.me/573103510752?text=${whatsappMsg}`, '_blank');
+        alert("⚠️ Usamos WhatsApp como respaldo. Ya recibimos tu solicitud.");
+        
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Enviar Solicitud';
     }
-  });
+});
 
 // Status Checker
 function checkStatus() {
@@ -162,6 +176,11 @@ function sendMessage() {
     input.value = '';
     messages.scrollTop = messages.scrollHeight;
 }
+
+// Enter key for chatbot
+document.getElementById('user-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+});
 
 // Enter key for chatbot
 document.getElementById('user-input').addEventListener('keypress', (e) => {
