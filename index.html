@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZiirTech - Dashboard de Servicios</title>
+    <title>ZiirTech - Soporte Técnico Profesional</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,6 @@
         <nav>
             <a href="#servicios">Servicios</a>
             <a href="#estado">Estado</a>
-            <a href="#recursos">Recursos</a>
             <a href="#contacto" class="btn-contact">Contacto</a>
         </nav>
     </header>
@@ -29,12 +28,12 @@
             <h1>Tu Tecnología, <span class="highlight" id="rotating-text">Siempre Funcionando</span></h1>
             <p>Mantenimiento preventivo y soporte técnico con respuesta en menos de 24h</p>
             <div class="cta-buttons">
-                <a href="#solicitar" class="btn-primary">Solicitar Servicio</a>
+                <a href="#solicitar" class="btn-primary" onclick="openModal('preventivo')">Solicitar Servicio</a>
                 <a href="#estado" class="btn-secondary">Ver Estado de Mi Equipo</a>
             </div>
         </div>
         <div class="hero-image">
-            <img src="https://via.placeholder.com/600x400/4B0082/FFFFFF?text=Dashboard+ZiirTech" alt="Dashboard ZiirTech" loading="lazy">
+            <img src="https://via.placeholder.com/600x400/4B0082/FFFFFF?text=ZiirTech+Solutions" alt="Tecnología ZiirTech" loading="lazy">
         </div>
     </section>
 
@@ -45,7 +44,7 @@
             <div class="service-card" onclick="openModal('preventivo')">
                 <i class="fas fa-shield-alt"></i>
                 <h3>Mantenimiento Preventivo</h3>
-                <p>Desde $80.000</p>
+                <p>Desde $80.000/mes</p>
                 <div class="progress-bar" data-progress="80"></div>
             </div>
             <div class="service-card" onclick="openModal('correctivo')">
@@ -73,57 +72,41 @@
         </div>
     </section>
 
-    <!-- Recursos -->
-    <!--section class="resources" id="recursos">
-        <h2><i class="fas fa-graduation-cap"></i> Aprende con ZiirTech</h2>
-        <div class="video-grid">
-            <div class="video-card">
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Mantenimiento Básico" allowfullscreen></iframe>
-                <h3>5 Pasos para Limpiar tu PC</h3>
-            </div>
-            <div class="video-card">
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Optimización" allowfullscreen></iframe>
-                <h3>Acelera tu Computador</h3>
-            </div>
-        </div>
-        <button class="btn-resources">Ver Todos los Tutoriales</button>
-    </section-->
-
     <!-- Footer -->
     <footer id="contacto">
         <div class="footer-content">
             <div class="contact-info">
                 <h3>Contacto</h3>
-                <p><i class="fas fa-phone"></i> 3103510752</p>
+                <p><i class="fas fa-phone"></i> 310 3510752</p>
                 <p><i class="fas fa-envelope"></i> ziirtech.72001233@gmail.com</p>
             </div>
             <div class="social-links">
                 <h3>Síguenos</h3>
-                <a href="https://www.instagram.com/ziirtech"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/+573103510752"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.tiktok.com/@ziir_tech"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/ziirtech" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/573103510752" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.tiktok.com/@ziir_tech" target="_blank"><i class="fab fa-tiktok"></i></a>
             </div>
         </div>
         <div class="chatbot-trigger" onclick="openChat()">
-            <i class="fas fa-robot"></i> ZiirBot
+            <i class="fas fa-robot"></i> Asistente Zii
         </div>
     </footer>
 
     <!-- Modal -->
     <div class="modal" id="service-modal">
         <div class="modal-content">
-          <span class="close-btn" onclick="closeModal()">&times;</span>
-          <h2 id="modal-title">Servicio</h2>
-          <p id="modal-description">Descripción del servicio seleccionado.</p>
-          <form id="service-form">
-            <input type="text" placeholder="Nombre completo" required>
-            <input type="email" placeholder="Correo electrónico" required>
-            <input type="tel" placeholder="Teléfono (opcional)">
-            <textarea placeholder="Describe tu problema o necesidad..." required></textarea>
-            <button type="submit">Enviar Solicitud</button>
-          </form>
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title">Servicio</h2>
+            <p id="modal-description">Descripción del servicio seleccionado.</p>
+            <form id="service-form">
+                <input type="text" placeholder="Nombre completo" required>
+                <input type="email" placeholder="Correo electrónico" required>
+                <input type="tel" placeholder="Teléfono (opcional)">
+                <textarea placeholder="Describe tu problema o necesidad..." required></textarea>
+                <button type="submit">Enviar Solicitud</button>
+            </form>
         </div>
-      </div>
+    </div>
 
     <!-- Chatbot -->
     <div class="chatbot" id="chatbot">
@@ -132,7 +115,7 @@
             <button onclick="closeChat()"><i class="fas fa-times"></i></button>
         </div>
         <div class="chatbot-messages" id="chat-messages">
-            <div class="bot-message">¡Hola! Soy Ziir, ¿en qué puedo ayudarte hoy?</div>
+            <div class="bot-message">¡Hola! Soy Zii, ¿en qué puedo ayudarte hoy?</div>
         </div>
         <div class="chatbot-input">
             <input type="text" id="user-input" placeholder="Escribe tu pregunta...">
@@ -140,11 +123,9 @@
         </div>
     </div>
 
-<!-- Mantén todo igual hasta antes de </body> -->
-<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
-<script src="script.js"></script>
-</body>
-</html>
+    <!-- Firebase y Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
