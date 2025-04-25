@@ -84,7 +84,7 @@ window.checkStatus = function() {
 // ============= [MANEJO DE FORMULARIO] =============
 async function saveRequest(serviceType, formData) {
     try {
-        const docRef = await db.collection("solicitudes").add({
+        const requestData = {
             servicio: serviceType,
             nombre: formData.nombre,
             email: formData.email,
@@ -92,13 +92,17 @@ async function saveRequest(serviceType, formData) {
             problema: formData.problema,
             fecha: firebase.firestore.FieldValue.serverTimestamp(),
             estado: "nuevo"
-        });
-        
-        console.log("✅ Solicitud guardada ID:", docRef.id);
+        };
+
+        console.log("📤 Enviando datos a Firestore:", requestData);
+
+        const docRef = await db.collection("solicitudes").add(requestData);
+        console.log("✅ Solicitud guardada con ID:", docRef.id);
         return true;
-        
+
     } catch (error) {
-        console.error("❌ Error en Firebase:", error);
+        console.error("❌ Error al guardar en Firestore:", error);
+        alert("Hubo un error al enviar el formulario. Se redirigirá a WhatsApp.");
         
         // Fallback a WhatsApp
         const whatsappMsg = `*SOLICITUD DE EMERGENCIA*%0A` + 
@@ -133,8 +137,6 @@ document.getElementById('service-form').addEventListener('submit', async (e) => 
         alert("✅ Solicitud enviada correctamente");
         closeModal();
         e.target.reset();
-    } else {
-        alert("⚠️ Se redirigió a WhatsApp por seguridad");
     }
 
     submitBtn.disabled = false;
@@ -205,4 +207,4 @@ document.getElementById('user-input').addEventListener('keypress', (e) => {
 });
 
 // ============= [INICIALIZACIÓN] =============
-console.log("ZiirTech System v3.1 - Fully Operational");
+console.log("ZiirTech System v3.2 - Fully Operational");
