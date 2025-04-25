@@ -7,7 +7,7 @@ setInterval(() => {
     document.getElementById('rotating-text').textContent = rotatingTexts[currentIndex];
 }, 3000);
 
-// Configuración Firebase (USAR TUS CREDENCIALES)
+// Configuración Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyAEmSj7LJFSOTHBJbN6rKZ1mxcXf0dfx3M",
     authDomain: "ziirtech.firebaseapp.com",
@@ -21,36 +21,69 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// ============= [FUNCIONES DEL MODAL] =============
-function openModal(serviceType) {
+// ============= [FUNCIONES GLOBALES] =============
+window.openModal = function(serviceType) {
     const services = {
         preventivo: {
             title: "Mantenimiento Preventivo",
-            desc: "Programa revisiones periódicas para evitar fallos."
+            desc: "Programa revisiones periódicas para evitar fallos. Incluye limpieza física y diagnóstico completo."
         },
         correctivo: {
-            title: "Soporte Correctivo",
-            desc: "Solución de problemas técnicos en hardware/software."
+            title: "Soporte Correctivo", 
+            desc: "Solución de problemas técnicos en hardware o software. Reparación de componentes dañados."
         },
         redes: {
             title: "Configuración de Redes",
-            desc: "Diseño e implementación de redes seguras."
+            desc: "Diseño e implementación de redes seguras para hogares o negocios. Optimización de velocidad."
         }
     };
     
     document.getElementById('modal-title').textContent = services[serviceType].title;
     document.getElementById('modal-description').textContent = services[serviceType].desc;
     document.getElementById('service-modal').style.display = 'flex';
-}
+};
 
-function closeModal() {
+window.closeModal = function() {
     document.getElementById('service-modal').style.display = 'none';
-}
+};
+
+window.checkStatus = function() {
+    const clientId = document.getElementById('client-id').value.trim();
+    const statusCard = document.getElementById('equipo-status');
+    
+    if (!clientId) {
+        statusCard.innerHTML = '<p class="warning">⚠️ Ingresa tu ID de cliente</p>';
+        return;
+    }
+
+    statusCard.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> Verificando...</p>';
+    
+    setTimeout(() => {
+        const status = Math.random() > 0.3 ? 'healthy' : 
+                      Math.random() > 0.5 ? 'warning' : 'critical';
+        
+        if (status === 'healthy') {
+            statusCard.innerHTML = `
+                <p class="healthy">✅ Tu equipo está en óptimas condiciones</p>
+                <p><small>Última revisión: ${new Date().toLocaleDateString('es-CO')}</small></p>
+            `;
+        } else if (status === 'warning') {
+            statusCard.innerHTML = `
+                <p class="warning">⚠️ Se recomienda mantenimiento preventivo</p>
+                <button onclick="openModal('preventivo')" class="btn-alert">Agendar Mantenimiento</button>
+            `;
+        } else {
+            statusCard.innerHTML = `
+                <p class="critical">❌ Problema crítico detectado</p>
+                <a href="https://wa.me/573103510752" class="btn-alert">Soporte Urgente</a>
+            `;
+        }
+    }, 1500);
+};
 
 // ============= [MANEJO DE FORMULARIO] =============
 async function saveRequest(serviceType, formData) {
     try {
-        // 1. Intento guardar en Firebase
         const docRef = await db.collection("solicitudes").add({
             servicio: serviceType,
             nombre: formData.nombre,
@@ -65,10 +98,10 @@ async function saveRequest(serviceType, formData) {
         return true;
         
     } catch (error) {
-        console.error("❌ Error Firebase:", error);
+        console.error("❌ Error en Firebase:", error);
         
-        // 2. Fallback a WhatsApp
-        const whatsappMsg = `*SOLICITUD (Error en sistema)*%0A` +
+        // Fallback a WhatsApp
+        const whatsappMsg = `*SOLICITUD DE EMERGENCIA*%0A` + 
             `Servicio: ${serviceType}%0A` +
             `Nombre: ${formData.nombre}%0A` +
             `Tel: ${formData.telefono || 'No proporcionado'}%0A` +
@@ -108,79 +141,68 @@ document.getElementById('service-form').addEventListener('submit', async (e) => 
     submitBtn.innerHTML = 'Enviar Solicitud';
 });
 
-// ============= [VERIFICADOR DE ESTADO] =============
-function checkStatus() {
-    const clientId = document.getElementById('client-id').value.trim();
-    const statusCard = document.getElementById('equipo-status');
-    
-    if (!clientId) {
-        statusCard.innerHTML = '<p class="warning">⚠️ Ingresa tu ID de cliente</p>';
-        return;
-    }
-
-    statusCard.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> Verificando...</p>';
-    
-    setTimeout(() => {
-        const statuses = [
-            { type: 'healthy', msg: '✅ Equipo en óptimas condiciones' },
-            { type: 'warning', msg: '⚠️ Necesita mantenimiento preventivo' },
-            { type: 'critical', msg: '❌ Problema crítico detectado' }
-        ];
-        
-        const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
-        statusCard.innerHTML = `<p class="${randomStatus.type}">${randomStatus.msg}</p>`;
-        
-        if (randomStatus.type !== 'healthy') {
-            statusCard.innerHTML += `
-                <button onclick="${randomStatus.type === 'warning' 
-                    ? "openModal('preventivo')" 
-                    : "window.open('https://wa.me/573103510752')"}" 
-                class="btn-alert">
-                    ${randomStatus.type === 'warning' ? 'Agendar Mantenimiento' : 'Soporte Urgente'}
-                </button>`;
-        }
-    }, 1500);
-}
-
 // ============= [CHATBOT] =============
-const chat = {
-    open: () => document.getElementById('chatbot').style.display = 'flex',
-    close: () => document.getElementById('chatbot').style.display = 'none',
-    send: () => {
-        const input = document.getElementById('user-input');
-        if (!input.value.trim()) return;
-        
-        const messages = document.getElementById('chat-messages');
-        messages.innerHTML += `<div class="user-message">${input.value}</div>`;
-        
-        setTimeout(() => {
-            const responses = {
-                hola: "¡Hola! Soy Zii, ¿en qué puedo ayudarte?",
-                precio: "🔹 <b>Preventivo:</b> $80,000<br>🔹 <b>Correctivo:</b> $125,000<br>🔹 <b>Redes:</b> $199,000",
-                contacto: "📞 <b>Teléfono:</b> 310 3510752<br>💬 <b>WhatsApp:</b> <a href='https://wa.me/573103510752'>Click aquí</a>",
-                default: "¿Necesitas ayuda con algún servicio en particular?"
-            };
-            
-            const userText = input.value.toLowerCase();
-            messages.innerHTML += `<div class="bot-message">${
-                userText.includes('hola') ? responses.hola :
-                userText.includes('precio') ? responses.precio :
-                userText.includes('contacto') ? responses.contacto :
-                responses.default
-            }</div>`;
-            
-            messages.scrollTop = messages.scrollHeight;
-        }, 800);
-        
-        input.value = '';
-        messages.scrollTop = messages.scrollHeight;
-    }
+window.openChat = function() {
+    document.getElementById('chatbot').style.display = 'flex';
 };
 
-// Eventos
+window.closeChat = function() {
+    document.getElementById('chatbot').style.display = 'none';
+};
+
+window.sendMessage = function() {
+    const input = document.getElementById('user-input');
+    const messages = document.getElementById('chat-messages');
+    
+    if (!input.value.trim()) return;
+    
+    // Mensaje del usuario
+    const userMsg = document.createElement('div');
+    userMsg.className = 'user-message';
+    userMsg.textContent = input.value;
+    messages.appendChild(userMsg);
+    
+    // Respuesta del bot
+    setTimeout(() => {
+        const botMsg = document.createElement('div');
+        botMsg.className = 'bot-message';
+        const userText = input.value.toLowerCase();
+        
+        if (userText.includes('hola') || userText.includes('buenas')) {
+            botMsg.innerHTML = `¡Hola! Soy Zii, el asistente de ZiirTech. ¿En qué puedo ayudarte hoy?<br>
+                               Puedes preguntarme sobre:<br>
+                               - Servicios<br>
+                               - Precios<br>
+                               - Estado de tu equipo`;
+        } 
+        else if (userText.includes('precio') || userText.includes('cuesta')) {
+            botMsg.innerHTML = `Nuestros servicios:<br>
+                               <b>• Mantenimiento Preventivo:</b> $80,000<br>
+                               <b>• Soporte Correctivo:</b> Desde $125,000<br>
+                               <b>• Configuración de Redes:</b> Desde $199,000`;
+        }
+        else if (userText.includes('contacto') || userText.includes('whatsapp')) {
+            botMsg.innerHTML = `Puedes contactarnos por:<br>
+                               <b>📞 Teléfono:</b> 310 3510752<br>
+                               <b>📧 Email:</b> ziirtech.72001233@gmail.com<br>
+                               <b>💬 WhatsApp:</b> <a href="https://wa.me/573103510752" target="_blank">Haz clic aquí</a>`;
+        }
+        else {
+            botMsg.textContent = 'No entendí tu pregunta. ¿Puedes ser más específico? O si prefieres, te conecto con un técnico.';
+        }
+        
+        messages.appendChild(botMsg);
+        messages.scrollTop = messages.scrollHeight;
+    }, 800);
+    
+    input.value = '';
+    messages.scrollTop = messages.scrollHeight;
+};
+
+// Enter key para el chatbot
 document.getElementById('user-input').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') chat.send();
+    if (e.key === 'Enter') sendMessage();
 });
 
 // ============= [INICIALIZACIÓN] =============
-console.log("ZiirTech System v3.0 - Ready");
+console.log("ZiirTech System v3.1 - Fully Operational");
