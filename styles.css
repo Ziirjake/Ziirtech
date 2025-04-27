@@ -173,6 +173,15 @@ nav a:hover {
     transform: translateY(-3px);
 }
 
+.btn-employee {
+    background-color: #FF7F50;
+    color: white !important;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--border-radius);
+    transition: all 0.3s;
+}
+
+
 .hero-image {
     max-width: 500px;
 }
