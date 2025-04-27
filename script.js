@@ -47,7 +47,7 @@ window.closeModal = function() {
     document.getElementById('service-modal').style.display = 'none';
 };
 
-window.checkStatus = function() {
+window.checkStatus = async function() {
     const clientId = document.getElementById('client-id').value.trim();
     const statusCard = document.getElementById('equipo-status');
     
@@ -58,28 +58,60 @@ window.checkStatus = function() {
 
     statusCard.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> Verificando...</p>';
     
-    setTimeout(() => {
-        const status = Math.random() > 0.3 ? 'healthy' : 
-                      Math.random() > 0.5 ? 'warning' : 'critical';
+    try {
+        // Buscar en ambas colecciones
+        const [solicitudDoc, equipoDoc] = await Promise.all([
+            db.collection("solicitudes").where("idCliente", "==", clientId).limit(1).get(),
+            db.collection("equipos").doc(clientId).get()
+        ]);
         
-        if (status === 'healthy') {
-            statusCard.innerHTML = `
-                <p class="healthy">✅ Tu equipo está en óptimas condiciones</p>
-                <p><small>Última revisión: ${new Date().toLocaleDateString('es-CO')}</small></p>
-            `;
-        } else if (status === 'warning') {
-            statusCard.innerHTML = `
-                <p class="warning">⚠️ Se recomienda mantenimiento preventivo</p>
-                <button onclick="openModal('preventivo')" class="btn-alert">Agendar Mantenimiento</button>
-            `;
-        } else {
-            statusCard.innerHTML = `
-                <p class="critical">❌ Problema crítico detectado</p>
-                <a href="https://wa.me/573103510752" class="btn-alert">Soporte Urgente</a>
+        let statusHTML = '';
+        
+        // Mostrar información de equipo si existe
+        if (equipoDoc.exists) {
+            const equipo = equipoDoc.data();
+            statusHTML += `
+                <h3>Estado del Equipo</h3>
+                <p><strong>Cliente:</strong> ${equipo.clientName}</p>
+                <p><strong>Equipo:</strong> ${equipo.equipmentType} - ${equipo.equipmentBrand}</p>
+                <p class="${equipo.status}">🛠️ Estado: ${getStatusText(equipo.status)}</p>
+                ${equipo.technicianNotes ? `<p><strong>Notas:</strong> ${equipo.technicianNotes}</p>` : ''}
             `;
         }
-    }, 1500);
+        
+        // Mostrar información de solicitud si existe
+        if (!solicitudDoc.empty) {
+            const solicitud = solicitudDoc.docs[0].data();
+            statusHTML += `
+                <h3>Solicitud de Servicio</h3>
+                <p><strong>Servicio:</strong> ${solicitud.servicio}</p>
+                <p><strong>Estado:</strong> ${solicitud.estado}</p>
+                <p><strong>Fecha:</strong> ${solicitud.fecha?.toDate().toLocaleDateString('es-CO') || 'No especificada'}</p>
+            `;
+        }
+        
+        if (!equipoDoc.exists && solicitudDoc.empty) {
+            statusHTML = '<p class="warning">⚠️ No se encontró información para este ID</p>';
+        }
+        
+        statusCard.innerHTML = statusHTML;
+        
+    } catch (error) {
+        console.error("Error al verificar estado:", error);
+        statusCard.innerHTML = '<p class="critical">❌ Error al consultar el estado</p>';
+    }
 };
+
+// Función auxiliar para traducir estados
+function getStatusText(status) {
+    const statusMap = {
+        'diagnostico': 'En Diagnóstico',
+        'reparacion': 'En Reparación',
+        'pruebas': 'En Pruebas Finales',
+        'listo': 'Listo para Recoger'
+    };
+    return statusMap[status] || status;
+}
 
 // ============= [MANEJO DE FORMULARIO] =============
 async function saveRequest(serviceType, formData) {
@@ -203,6 +235,16 @@ window.sendMessage = function() {
 document.getElementById('user-input').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') sendMessage();
 });
+
+
+if (window.location.href.includes('admin')) {
+    const adminLink = document.createElement('a');
+    adminLink.href = 'empleados/login.html';
+    adminLink.textContent = 'Panel Empleados';
+    adminLink.className = 'btn-employee';
+    document.querySelector('nav').appendChild(adminLink);
+
+}
 
 // ============= [INICIALIZACIÓN] =============
 console.log("ZiirTech System v3.1 - Fully Operational");
