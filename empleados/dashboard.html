@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZiirTech - Panel Empleados</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="empleados.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="employee-header">
+        <div class="logo">
+            <img src="../logo.png" alt="ZiirTech Logo">
+            <h1>Panel <span>Empleados</span></h1>
+        </div>
+        <nav>
+            <span id="employee-name"></span>
+            <button id="logout-btn" class="btn-logout">
+                <i class="fas fa-sign-out-alt"></i> Salir
+            </button>
+        </nav>
+    </header>
+
+    <main class="employee-dashboard">
+        <!-- Sección para agregar nuevo equipo -->
+        <section class="add-equipment">
+            <h2><i class="fas fa-plus-circle"></i> Registrar Nuevo Equipo</h2>
+            <form id="equipment-form">
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="service-id">ID de Servicio</label>
+                        <input type="text" id="service-id" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="client-name">Nombre del Cliente</label>
+                        <input type="text" id="client-name" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="equipment-type">Tipo de Equipo</label>
+                        <select id="equipment-type" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="laptop">Laptop</option>
+                            <option value="desktop">Computador de Escritorio</option>
+                            <option value="server">Servidor</option>
+                            <option value="other">Otro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="equipment-brand">Marca/Modelo</label>
+                        <input type="text" id="equipment-brand" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="problem-description">Problema Reportado</label>
+                    <textarea id="problem-description" rows="3" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-save"></i> Registrar Equipo
+                </button>
+            </form>
+        </section>
+
+        <!-- Sección de seguimiento -->
+        <section class="tracking-section">
+            <h2><i class="fas fa-tasks"></i> Equipos en Proceso</h2>
+            <div class="status-filters">
+                <button class="status-filter active" data-status="all">Todos</button>
+                <button class="status-filter" data-status="diagnostico">En Diagnóstico</button>
+                <button class="status-filter" data-status="reparacion">En Reparación</button>
+                <button class="status-filter" data-status="pruebas">En Pruebas</button>
+                <button class="status-filter" data-status="listo">Listo para Entrega</button>
+            </div>
+            
+            <div class="equipment-list" id="equipment-list">
+                <!-- Los equipos se cargarán aquí dinámicamente -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para actualizar estado -->
+    <div class="modal" id="status-modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-equipment-id"></h2>
+            <p>Cliente: <span id="modal-client-name"></span></p>
+            
+            <div class="status-options">
+                <h3>Actualizar Estado:</h3>
+                <div class="status-option" data-status="diagnostico">
+                    <i class="fas fa-search"></i>
+                    <span>En Diagnóstico</span>
+                </div>
+                <div class="status-option" data-status="reparacion">
+                    <i class="fas fa-tools"></i>
+                    <span>En Reparación</span>
+                </div>
+                <div class="status-option" data-status="pruebas">
+                    <i class="fas fa-check-circle"></i>
+                    <span>En Pruebas</span>
+                </div>
+                <div class="status-option" data-status="listo">
+                    <i class="fas fa-thumbs-up"></i>
+                    <span>Listo para Entrega</span>
+                </div>
+            </div>
+            
+            <div class="notes-section">
+                <label for="technician-notes">Notas del Técnico:</label>
+                <textarea id="technician-notes" rows="4"></textarea>
+            </div>
+            
+            <button id="save-status-btn" class="btn-primary">
+                <i class="fas fa-save"></i> Guardar Cambios
+            </button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="empleados.js"></script>
+</body>
+</html>
