@@ -17,8 +17,8 @@
         
         <form id="login-form">
             <div class="input-group">
-                <label for="username"><i class="fas fa-user"></i> Usuario</label>
-                <input type="text" id="username" required>
+                <label for="username"><i class="fas fa-user"></i> Usuario (email)</label>
+                <input type="text" id="username" placeholder="usuario@ziirtech.com" required>
             </div>
             
             <div class="input-group">
@@ -32,11 +32,16 @@
             
             <div id="login-error" class="error-message"></div>
         </form>
+
+        <!-- Botón para regresar al index -->
+        <a href="../index.html" class="btn-return">
+            <i class="fas fa-arrow-left"></i> Regresar al inicio
+        </a>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
-    <script src="empleados.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+<script src="../firebase-config.js"></script> <script src="empleados.js"></script>
 </body>
 </html>

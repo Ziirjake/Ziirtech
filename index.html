@@ -9,70 +9,116 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="logo">
-            <img src="logo.png" alt="ZiirTech Logo">
+            <img src="logo.jpg" alt="ZiirTech Logo">
             <h1>Ziir<span>Tech</span></h1>
         </div>
-        <nav>
+        <nav id="navbar">
             <a href="#servicios">Servicios</a>
-            <a href="#estado">Estado</a>
+            <a href="#nosotros">Nosotros</a> <a href="#estado">Estado</a>
             <a href="empleados/login.html" class="btn-contact">Ingresar</a>
         </nav>
+        <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>Tu Tecnología, <span class="highlight" id="rotating-text">Siempre Funcionando</span></h1>
             <p>Mantenimiento preventivo y soporte técnico con respuesta en menos de 24h</p>
             <div class="cta-buttons">
-                <a href="#solicitar" class="btn-primary" onclick="openModal('preventivo')">Solicitar Servicio</a>
                 <a href="#estado" class="btn-secondary">Ver Estado de Mi Equipo</a>
             </div>
         </div>
         <div class="hero-image">
-            <img src="https://via.placeholder.com/600x400/4B0082/FFFFFF?text=ZiirTech+Solutions" alt="Tecnología ZiirTech" loading="lazy">
+            <img src="logo.jpg" alt="Tecnología ZiirTech" loading="lazy">
         </div>
     </section>
 
-    <!-- Servicios Dashboard -->
+    <section id="nosotros" class="about-us-section">
+        <div class="container">
+            <h2>Impulsados por la Pasión Tecnológica</h2>
+            <div class="about-us-grid">
+                
+                <div class="about-us-card">
+                    <div class="about-us-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Nuestra Misión</h3>
+                    <p>Ofrecer soluciones de soporte técnico rápidas, eficientes y transparentes, devolviéndole la tranquilidad a nuestros clientes para que disfruten de su tecnología sin interrupciones.</p>
+                </div>
+                
+                <div class="about-us-card">
+                    <div class="about-us-icon"><i class="fas fa-eye"></i></div>
+                    <h3>Nuestra Visión</h3>
+                    <p>Convertirnos en el referente de soporte técnico en Antioquia, haciendo que la tecnología sea sencilla y accesible para todos, respaldada por un servicio al cliente excepcional.</p>
+                </div>
+                
+                <div class="about-us-card slogan-card">
+                     <h3>Nuestro Lema</h3>
+                     <blockquote>
+                        <p>"Tu mundo digital, sin pausas."</p>
+                     </blockquote>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2>Nuestro Proceso es Sencillo</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-icon"><i class="fas fa-file-alt"></i></div>
+                <h3>1. Solicita</h3>
+                <p>Elige un servicio y llena el formulario con tus datos. Es rápido y fácil.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon"><i class="fas fa-receipt"></i></div>
+                <h3>2. Recibe tu ID</h3>
+                <p>Te asignamos un ID único para tu equipo. ¡Guárdalo bien!</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon"><i class="fas fa-search-location"></i></div>
+                <h3>3. Sigue el Proceso</h3>
+                <p>Usa tu ID en nuestra web para ver el estado de tu equipo en tiempo real, 24/7.</p>
+            </div>
+        </div>
+    </section>
+
     <section class="services-dashboard" id="servicios">
         <h2><i class="fas fa-sliders-h"></i> Nuestros Servicios</h2>
         <div class="services-grid">
             <div class="service-card" onclick="openModal('preventivo')">
                 <i class="fas fa-shield-alt"></i>
                 <h3>Mantenimiento Preventivo</h3>
-                <p>Desde $80.000</p>
-                <div class="progress-bar" data-progress="80"></div>
+                <p>Desde $70.000</p>
+                <div class="progress-bar" data-progress="100"></div>
             </div>
             <div class="service-card" onclick="openModal('correctivo')">
                 <i class="fas fa-tools"></i>
                 <h3>Mantenimiento Correctivo</h3>
-                <p>Desde $125.000</p>
-                <div class="progress-bar" data-progress="65"></div>
+                <p>Desde $115.000</p>
+                <div class="progress-bar" data-progress="100"></div>
             </div>
             <div class="service-card" onclick="openModal('apps')">
                 <i class="fas fa-download"></i>
                 <h3>Instalación de Apps</h3>
                 <p>Desde $25.000</p>
-                <div class="progress-bar" data-progress="90"></div>
+                <div class="progress-bar" data-progress="100"></div>
             </div>
         </div>
     </section>
 
-    <!-- Estado del Equipo -->
     <section class="status-tracker" id="estado">
         <h2><i class="fas fa-laptop-medical"></i> Estado de Tu Equipo</h2>
-        <div class="status-card" id="equipo-status">
+        <div class="status-card">
             <p>🔍 Ingresa tu ID de cliente para verificar...</p>
-            <input type="text" placeholder="ID (ej: ZT-2024-ABC123)" id="client-id">
+            <input type="text" placeholder="ID (ej: ZT-123456)" id="client-id">
             <button onclick="checkStatus()">Verificar</button>
+            <div id="equipo-status-result" class="status-result">
+                </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contacto">
         <div class="footer-content">
             <div class="contact-info">
@@ -82,9 +128,9 @@
             </div>
             <div class="social-links">
                 <h3>Síguenos</h3>
-                <a href="https://www.instagram.com/ziirtech" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/573103510752" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.tiktok.com/@ziir_tech" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <p><a href="https://www.instagram.com/ziirtech" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></p>
+                <p><a href="https://wa.me/573103510752" target="_blank"><i class="fab fa-whatsapp"></i> Whatsapp</a></p>
+                <p><a href="https://www.tiktok.com/@ziir_tech" target="_blank"><i class="fab fa-tiktok"></i> Tik-Tok</a></p>
             </div>
         </div>
         <div class="chatbot-trigger" onclick="openChat()">
@@ -92,23 +138,29 @@
         </div>
     </footer>
 
-    <!-- Modal -->
     <div class="modal" id="service-modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 id="modal-title">Servicio</h2>
-            <p id="modal-description">Descripción del servicio seleccionado.</p>
+            <h2 id="modal-title">Solicitar Servicio</h2>
+            <p id="modal-description"></p>
             <form id="service-form">
                 <input type="text" placeholder="Nombre completo" required>
                 <input type="email" placeholder="Correo electrónico" required>
-                <input type="tel" placeholder="Teléfono (opcional)">
+                <input type="tel" placeholder="Teléfono">
+                <select id="equipment-type" required>
+                    <option value="">Seleccione tipo de equipo...</option>
+                    <option value="laptop">Laptop/Portátil</option>
+                    <option value="desktop">Computador de escritorio</option>
+                </select>
+                <input type="text" id="equipment-model" placeholder="Marca y modelo del equipo" required>
                 <textarea placeholder="Describe tu problema o necesidad..." required></textarea>
                 <button type="submit">Enviar Solicitud</button>
             </form>
         </div>
     </div>
+    
+    <div id="notification-container"></div>
 
-    <!-- Chatbot -->
     <div class="chatbot" id="chatbot">
         <div class="chatbot-header">
             <h3>Asistente Ziir</h3>
@@ -123,9 +175,9 @@
         </div>
     </div>
 
-    <!-- Firebase y Scripts -->
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

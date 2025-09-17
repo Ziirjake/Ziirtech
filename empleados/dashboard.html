@@ -23,19 +23,32 @@
     </header>
 
     <main class="employee-dashboard">
-        <!-- Sección para agregar nuevo equipo -->
+
+        <section class="pending-requests">
+            <h2><i class="fas fa-inbox"></i> Solicitudes Pendientes</h2>
+            <div id="pending-requests-list" class="requests-grid">
+                </div>
+        </section>
+
         <section class="add-equipment">
             <h2><i class="fas fa-plus-circle"></i> Registrar Nuevo Equipo</h2>
+            <p>Selecciona una solicitud pendiente o busca una para llenar los datos.</p>
             <form id="equipment-form">
+                <div class="input-group">
+                    <label for="search-request">Buscar Solicitud (si no aparece en pendientes)</label>
+                    <input type="text" id="search-request" placeholder="Buscar por ID, nombre o email...">
+                    <div id="request-results" class="search-results"></div>
+                </div>
+                
                 <div class="form-row">
                     <div class="input-group">
-                        <label for="service-id">ID de Servicio</label>
-                        <input type="text" id="service-id" required>
+                        <label for="service-id">ID de Cliente</label>
+                        <input type="text" id="service-id" required readonly>
                     </div>
                     
                     <div class="input-group">
                         <label for="client-name">Nombre del Cliente</label>
-                        <input type="text" id="client-name" required>
+                        <input type="text" id="client-name" required readonly>
                     </div>
                 </div>
                 
@@ -68,24 +81,22 @@
             </form>
         </section>
 
-        <!-- Sección de seguimiento -->
         <section class="tracking-section">
             <h2><i class="fas fa-tasks"></i> Equipos en Proceso</h2>
             <div class="status-filters">
-                <button class="status-filter active" data-status="all">Todos</button>
-                <button class="status-filter" data-status="diagnostico">En Diagnóstico</button>
-                <button class="status-filter" data-status="reparacion">En Reparación</button>
-                <button class="status-filter" data-status="pruebas">En Pruebas</button>
-                <button class="status-filter" data-status="listo">Listo para Entrega</button>
+                    <button class="status-filter active" data-status="all">Todos</button>
+                    <button class="status-filter" data-status="diagnostico">En Diagnóstico</button>
+                    <button class="status-filter" data-status="reparacion">En Reparación</button>
+                    <button class="status-filter" data-status="pruebas">En Pruebas</button>
+                    <button class="status-filter" data-status="listo">Listo para Entrega</button>
+                    <button class="status-filter" data-status="finalizado">Historial (Finalizados)</button>
             </div>
             
             <div class="equipment-list" id="equipment-list">
-                <!-- Los equipos se cargarán aquí dinámicamente -->
-            </div>
+                </div>
         </section>
     </main>
 
-    <!-- Modal para actualizar estado -->
     <div class="modal" id="status-modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -126,6 +137,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="../firebase-config.js"></script>
     <script src="empleados.js"></script>
 </body>
 </html>
