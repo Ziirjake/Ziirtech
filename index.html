@@ -3,181 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZiirTech - Soporte Técnico Profesional</title>
+    <title>Ágora entre Torres | Proyecto Final</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="logo.jpg" alt="ZiirTech Logo">
-            <h1>Ziir<span>Tech</span></h1>
+
+    <nav class="navbar">
+        <div class="logo">Ágora</div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#equipo">Equipo</a></li>
+            <li><a href="#concepto">Concepto</a></li>
+            <li><a href="#galeria">Galería</a></li>
+        </ul>
+    </nav>
+
+    <header id="inicio" class="hero">
+        <div class="overlay"></div>
+        <div class="hero-content fade-in">
+            <h1>ÁGORA ENTRE TORRES</h1>
+            <div class="divider-hero"></div>
+            <p>Pensando el "Habitar colectivo".</p>
+            <a href="#equipo" class="btn">Conocer al Equipo</a>
         </div>
-        <nav id="navbar">
-            <a href="#servicios">Servicios</a>
-            <a href="#nosotros">Nosotros</a> <a href="#estado">Estado</a>
-            <a href="empleados/login.html" class="btn-contact">Ingresar</a>
-        </nav>
-        <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Tu Tecnología, <span class="highlight" id="rotating-text">Siempre Funcionando</span></h1>
-            <p>Mantenimiento preventivo y soporte técnico con respuesta en menos de 24h</p>
-            <div class="cta-buttons">
-                <a href="#estado" class="btn-secondary">Ver Estado de Mi Equipo</a>
-            </div>
-        </div>
-        <div class="hero-image">
-            <img src="logo.jpg" alt="Tecnología ZiirTech" loading="lazy">
-        </div>
-    </section>
-
-    <section id="nosotros" class="about-us-section">
-        <div class="container">
-            <h2>Impulsados por la Pasión Tecnológica</h2>
-            <div class="about-us-grid">
-                
-                <div class="about-us-card">
-                    <div class="about-us-icon"><i class="fas fa-bullseye"></i></div>
-                    <h3>Nuestra Misión</h3>
-                    <p>Ofrecer soluciones de soporte técnico rápidas, eficientes y transparentes, devolviéndole la tranquilidad a nuestros clientes para que disfruten de su tecnología sin interrupciones.</p>
+    <section id="equipo" class="team-section">
+        <div class="container-team scroll-reveal">
+            <h2>Equipo de Diseño</h2>
+            <div class="divider center"></div>
+            <p class="subtitle-dark">Proyecto final desarrollado por:</p>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <img src="SARA.jpg" alt="Sara Gil" class="avatar-img"> 
+                    <h3>Sara Gil Londoño</h3>
                 </div>
-                
-                <div class="about-us-card">
-                    <div class="about-us-icon"><i class="fas fa-eye"></i></div>
-                    <h3>Nuestra Visión</h3>
-                    <p>Convertirnos en el referente de soporte técnico en Antioquia, haciendo que la tecnología sea sencilla y accesible para todos, respaldada por un servicio al cliente excepcional.</p>
+                <div class="team-card">
+                    <img src="MAYA.jpg" alt="Mariana Londoño" class="avatar-img">
+                    <h3>Mariana Londoño Maya</h3>
                 </div>
-                
-                <div class="about-us-card slogan-card">
-                     <h3>Nuestro Lema</h3>
-                     <blockquote>
-                        <p>"Tu mundo digital, sin pausas."</p>
-                     </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <section id="concepto" class="container scroll-reveal">
+        <div class="text-block">
+            <h2>El Concepto</h2>
+            <div class="divider"></div>
+            <p>Ágora entre Torres redefine el habitar urbano fusionando la intimidad del hogar con la vitalidad pública del barrio Boston. El proyecto disuelve los límites entre la vivienda y la ciudad a través de una "ágora vertical" y un zócalo activo, consolidándose no solo como un edificio, sino como un sistema vivo de conexiones que revitaliza el tejido social y celebra el encuentro ciudadano.</p>
+        </div>
+        <div class="image-block">
+            <img src="feed.png" alt="Diagrama del proyecto" class="zoomable">
+        </div>
+    </section>
+
+    <section id="galeria" class="gallery-section">
+        <div class="container-gallery">
+            <h2>Galería del Proyecto</h2>
+            <p class="subtitle">Recorrido técnico y visual</p>
+            
+            <div class="category-block scroll-reveal">
+                <h3 class="category-title">1. Planimetría</h3>
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="planimetria1.jpg" alt="Planta Baja" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Sotano 3</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="planimetria2.jpg" alt="Planta Tipo" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Sotano 2</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="ZOCALO1.jpg" alt="Planta Tipo" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Zocalo-1</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="ZOCALO2.jpg" alt="Planta Tipo" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Zocalo-2</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="planimetria3.jpg" alt="Planta Tipo" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Zona social Torre 2</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="planimetria4.jpg" alt="Planta Tipo" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Planta 1 - Torre 2</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="planimetria5.jpg" alt="Planta Tipo" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Planta 2 - Torre 2</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="planimetria6.jpg" alt="Planta Tipo" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Planta 3 - Torre 2</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="planimetria7.jpg" alt="Planta Tipo" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Planta 4 - Torre 2</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="planimetria8.jpg" alt="Planta Tipo" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Planta 5 - Torre 2</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="planimetria9.jpg" alt="Planta Tipo" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Planta 9 - Torre 2 - Cubierta</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="planimetria10.jpg" alt="Planta Tipo" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Planta 10 - Torre 2</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="planimetria11.jpg" alt="Planta Tipo" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Planta 11 - Torre 2</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="planimetria12.jpg" alt="Planta Tipo" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Cubierta - Torre 2</p></div>
+                    </div>
                 </div>
+            </div>
 
-            </div>
-        </div>
-    </section>
-
-    <section class="how-it-works">
-        <h2>Nuestro Proceso es Sencillo</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-icon"><i class="fas fa-file-alt"></i></div>
-                <h3>1. Solicita</h3>
-                <p>Elige un servicio y llena el formulario con tus datos. Es rápido y fácil.</p>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-icon"><i class="fas fa-receipt"></i></div>
-                <h3>2. Recibe tu ID</h3>
-                <p>Te asignamos un ID único para tu equipo. ¡Guárdalo bien!</p>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-icon"><i class="fas fa-search-location"></i></div>
-                <h3>3. Sigue el Proceso</h3>
-                <p>Usa tu ID en nuestra web para ver el estado de tu equipo en tiempo real, 24/7.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="services-dashboard" id="servicios">
-        <h2><i class="fas fa-sliders-h"></i> Nuestros Servicios</h2>
-        <div class="services-grid">
-            <div class="service-card" onclick="openModal('preventivo')">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Mantenimiento Preventivo</h3>
-                <p>Desde $70.000</p>
-                <div class="progress-bar" data-progress="100"></div>
-            </div>
-            <div class="service-card" onclick="openModal('correctivo')">
-                <i class="fas fa-tools"></i>
-                <h3>Mantenimiento Correctivo</h3>
-                <p>Desde $115.000</p>
-                <div class="progress-bar" data-progress="100"></div>
-            </div>
-            <div class="service-card" onclick="openModal('apps')">
-                <i class="fas fa-download"></i>
-                <h3>Instalación de Apps</h3>
-                <p>Desde $25.000</p>
-                <div class="progress-bar" data-progress="100"></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="status-tracker" id="estado">
-        <h2><i class="fas fa-laptop-medical"></i> Estado de Tu Equipo</h2>
-        <div class="status-card">
-            <p>🔍 Ingresa tu ID de cliente para verificar...</p>
-            <input type="text" placeholder="ID (ej: ZT-123456)" id="client-id">
-            <button onclick="checkStatus()">Verificar</button>
-            <div id="equipo-status-result" class="status-result">
+            <div class="category-block scroll-reveal">
+                <h3 class="category-title">2. Fachada</h3>
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="fachada1.png" alt="Alzado Frontal" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Suroeste</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="fachada2.png" alt="Detalle Piel" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Nordeste</p></div>
+                    </div>
                 </div>
+            </div>
+
+            <div class="category-block scroll-reveal">
+                <h3 class="category-title">3. Secciones</h3>
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="seccion1.png" alt="Corte Longitudinal" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Sección A - A'</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="seccion2.jpg" alt="Corte Transversal" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Sección B - B'</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-block scroll-reveal">
+                <h3 class="category-title">4. Esquemas</h3>
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="esquema1.png" alt="Esquema Bioclimático" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Esquemas de calados y jardines</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="esquema2.jpg" alt="Esquema Bioclimático" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Estructuras</p></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="esquema3.png" alt="Esquema Bioclimático" class="zoomable">
+                        </div>
+                        <div class="card-info"><p>Tipologias</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-block scroll-reveal">
+                <h3 class="category-title">5. Renders Interiores</h3>
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="render-int1.png" alt="Vista Interior 1" class="zoomable">
+                        </div>
+                        <div class="card-info">
+                            <p>Tipologia estudiantil (Persona sola)</p> 
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="render-int2.jpg" alt="Vista Interior 2" class="zoomable">
+                        </div>
+                        <div class="card-info">
+                            <p>Tipologia familiar duplex</p> 
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="render-int3.jpg" alt="Vista Interior 3" class="zoomable">
+                        </div>
+                        <div class="card-info">
+                            <p>Tipologia movilidad reducida</p> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="category-block scroll-reveal">
+                <h3 class="category-title">6. Renders Exteriores</h3>
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="render-ext1.jpg" alt="Vista Aérea" class="zoomable">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="render-ext2.jpg" alt="Vista Peatonal" class="zoomable">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="render-ext4.jpg" alt="Vista Peatonal" class="zoomable">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="render-ext5.jpg" alt="Vista Peatonal" class="zoomable">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="render-ext6.jpg" alt="Vista Peatonal" class="zoomable">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="render-ext7.jpg" alt="Vista Peatonal" class="zoomable">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="render-ext8.jpg" alt="Vista Peatonal" class="zoomable">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="render-ext10.jpg" alt="Vista Peatonal" class="zoomable">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-block scroll-reveal">
+                <h3 class="category-title">7. Recorrido Virtual</h3>
+                <div class="grid video-grid">
+                    <div class="video-card">
+                        <iframe 
+                            src="https://www.youtube.com/embed/tM0idslcsgM?vq=hd720" 
+                            title="Video 1" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                        <p>Video Render #1</p>
+                    </div>
+                    <div class="video-card">
+                        <iframe 
+                            src="https://www.youtube.com/embed/AUr_Ltt-56c?vq=hd720" 
+                            title="Video 2" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                        <p>Video Render #2</p>
+                    </div>
+                    <div class="video-card">
+                        <iframe 
+                            src="https://www.youtube.com/embed/CD6k6izzris?vq=hd720" 
+                            title="Video 3" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                        <p>Video Render #3</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <footer id="contacto">
-        <div class="footer-content">
-            <div class="contact-info">
-                <h3>Contacto</h3>
-                <p><i class="fas fa-phone"></i> 310 3510752</p>
-                <p><i class="fas fa-envelope"></i> ziirtech.72001233@gmail.com</p>
-            </div>
-            <div class="social-links">
-                <h3>Síguenos</h3>
-                <p><a href="https://www.instagram.com/ziirtech" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></p>
-                <p><a href="https://wa.me/573103510752" target="_blank"><i class="fab fa-whatsapp"></i> Whatsapp</a></p>
-                <p><a href="https://www.tiktok.com/@ziir_tech" target="_blank"><i class="fab fa-tiktok"></i> Tik-Tok</a></p>
-            </div>
-        </div>
-        <div class="chatbot-trigger" onclick="openChat()">
-            <i class="fas fa-robot"></i>ZiirBot
-        </div>
+    <footer class="main-footer">
+        <p>Ágora entre Torres &copy; 2025 - Todos los derechos reservados.</p>
     </footer>
 
-    <div class="modal" id="service-modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 id="modal-title">Solicitar Servicio</h2>
-            <p id="modal-description"></p>
-            <form id="service-form">
-                <input type="text" placeholder="Nombre completo" required>
-                <input type="email" placeholder="Correo electrónico" required>
-                <input type="tel" placeholder="Teléfono">
-                <select id="equipment-type" required>
-                    <option value="">Seleccione tipo de equipo...</option>
-                    <option value="laptop">Laptop/Portátil</option>
-                    <option value="desktop">Computador de escritorio</option>
-                </select>
-                <input type="text" id="equipment-model" placeholder="Marca y modelo del equipo" required>
-                <textarea placeholder="Describe tu problema o necesidad..." required></textarea>
-                <button type="submit">Enviar Solicitud</button>
-            </form>
-        </div>
-    </div>
-    
-    <div id="notification-container"></div>
-
-    <div class="chatbot" id="chatbot">
-        <div class="chatbot-header">
-            <h3>Asistente Ziir</h3>
-            <button onclick="closeChat()"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="chatbot-messages" id="chat-messages">
-            <div class="bot-message">¡Hola! Soy Ziir, ¿en qué puedo ayudarte hoy?</div>
-        </div>
-        <div class="chatbot-input">
-            <input type="text" id="user-input" placeholder="Escribe tu pregunta...">
-            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
-        </div>
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
-    <script src="firebase-config.js"></script>
-    <script src="script.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
